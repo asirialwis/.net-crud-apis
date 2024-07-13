@@ -4,7 +4,7 @@ obj/
 
 .fake
 
-
+Migrations/
 *.swp
 *.*~
 project.lock.json
