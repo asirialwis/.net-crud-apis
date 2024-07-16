@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using api.Data;
 using api.Dtos.Stock;
 using api.Mappers;
+using Microsoft.AspNetCore.Authentication.OAuth;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -61,6 +63,20 @@ namespace api.Controllers
             stockModel.MarketCap = updateDto.MarketCap;
             _context.SaveChanges();
             return Ok(stockModel.ToStockDto());
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete ([FromRoute] int id){
+
+            var stockModel = _context.Stock.FirstOrDefault(s=> s.Id == id);
+            if (stockModel == null)
+            {
+                return NotFound();
+            }
+            _context.Stock.Remove(stockModel);
+            _context.SaveChanges();
+
+            return NoContent();
         }
 
     }
