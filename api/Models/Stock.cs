@@ -9,6 +9,8 @@ namespace api.Models
 {
     public class Stock
     {
+        internal int id;
+
         public int Id { get; set; }
         public String Symbol { get; set; } = String.Empty;
         public String CompanyName { get; set; } = String.Empty;
